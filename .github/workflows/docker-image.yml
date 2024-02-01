@@ -22,4 +22,4 @@ jobs:
       run: docker stop tool_set_api || true && docker rm tool_set_api || true
 
     - name: run docker container
-      run: docker run -d -p 443:443 --name tool_set_api -v /home/ubuntu/tool_set_api/ssl:/app/ssl -v /home/ubuntu/tool_set_api/static:/app/static tool_set_api:$(git rev-parse --short HEAD)
+      run: docker run -d -p 8000:8000 --name tool_set_api -v /home/ubuntu/tool_set_api/ssl:/app/ssl -v /home/ubuntu/tool_set_api/static:/app/static tool_set_api:$(git rev-parse --short HEAD)

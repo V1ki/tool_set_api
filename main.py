@@ -20,6 +20,4 @@ async def root():
 
 if __name__ == "__main__":
     # 指定 ssl 证书
-    uvicorn.run(app, host="0.0.0.0", port=443,
-                ssl_keyfile="./ssl/site.key", ssl_certfile="./ssl/site_bundle.crt",
-                )
+    uvicorn.run(app, host="0.0.0.0", port=8000)

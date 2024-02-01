@@ -15,4 +15,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag tool_set_api:$(date +%s)
+#      使用 commit id 作為 tag
+      run: docker build . --file Dockerfile --tag tool_set_api:$(git rev-parse --short HEAD)
+
+    - name: stop & remove old container if exists
+      run: docker stop tool_set_api || true && docker rm tool_set_api || true
+
+    - name: run docker container
+      run: docker run -d -p 443:443 --name tool_set_api -v /home/ubuntu/tool_set_api/ssl:/app/ssl -v /home/ubuntu/tool_set_api/static:/app/static tool_set_api:$(git rev-parse --short HEAD)
